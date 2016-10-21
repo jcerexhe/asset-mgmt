@@ -16,3 +16,36 @@
 .main-heading {
   padding-bottom: 40px;
 }
+
+.featured-card {
+  background-color: white;
+  border: 1px solid #F5F5F5;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.list-item {
+  cursor: pointer;
+}
+
+.list-item:hover {
+  text-decoration: underline;
+}
+
+.close-marker {
+  color: #CCCCCC;
+  float: right;
+  cursor: pointer;
+  /*border-radius: 60px;
+  border: 1px solid red;
+  padding: 1px 6px;
+  background-color: pink;*/
+}
+
+li {
+  list-style-type: none;
+}
+
+.featured-map {
+
+}

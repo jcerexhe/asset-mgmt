@@ -4,13 +4,15 @@ import './App.css';
 import firebase from 'firebase';
 import AssetList from './Assets/AssetList.js';
 import AssetNew from './Assets/AssetNew.js';
+import AssetFeatured from './Assets/AssetFeatured.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       assets: [],
-      loaded: false
+      loaded: false,
+      featured: ''
     };
   }
 
@@ -23,7 +25,7 @@ class App extends Component {
       messagingSenderId: "304772918533"
     };
     firebase.initializeApp(config);
-    firebase.database.enableLogging(true);
+    // firebase.database.enableLogging(true);
 
     let assets = [];
     firebase.database().ref('assets').on('value', (snapshot) => {
@@ -35,6 +37,18 @@ class App extends Component {
     });
   }
 
+  handleSetFeatured(obj) {
+    this.setState({
+      featured: obj
+    });
+  }
+
+  handleResetFeatured() {
+    this.setState({
+      featured: ''
+    });
+  }
+
   render() {
     return (
       <div className="container">
@@ -42,7 +56,8 @@ class App extends Component {
 
         <div className="row">
           <AssetNew />
-          <AssetList assets={this.state.assets} loaded={this.state.loaded} />
+          <AssetList assets={this.state.assets} loaded={this.state.loaded} setFeatured={this.handleSetFeatured.bind(this)} />
+          {this.state.featured ? <AssetFeatured featured={this.state.featured} resetFeatured={this.handleResetFeatured.bind(this)} /> : ''}
         </div>
       </div>
     );
